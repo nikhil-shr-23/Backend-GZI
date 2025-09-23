@@ -1,12 +1,7 @@
-import express from 'express';
+import app from './src/app.js';
+import { appConfig } from './src/config/env.js';
 
-const app = express();
-
-app.get('/', (req, res) => {
-  res.send('Server is running');
-});
-
-const PORT = process.env.PORT || 4000;
+const PORT = appConfig.port;
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console

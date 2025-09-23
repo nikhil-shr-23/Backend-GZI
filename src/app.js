@@ -2,6 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import { loadEnvironment, appConfig, corsOptions } from './config/env.js';
+import helmet from 'helmet';
+import cookieParser from 'cookie-parser';
+import rateLimit from 'express-rate-limit';
 import requestLogger from './middleware/requestLogger.js';
 import notFound from './middleware/notFound.js';
 import errorHandler from './middleware/errorHandler.js';
@@ -13,8 +16,11 @@ loadEnvironment();
 const app = express();
 
 // Core middleware
+app.use(helmet());
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors(corsOptions));
+app.use(rateLimit({ windowMs: 60 * 1000, max: 100 }));
 
 // Logging
 if (appConfig.nodeEnv !== 'test') {

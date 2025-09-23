@@ -25,4 +25,11 @@ export const databaseConfig = {
   mongoUri: process.env.MONGODB_URI,
 };
 
+export const jwtConfig = {
+  accessTokenSecret: process.env.JWT_ACCESS_SECRET || 'dev_access_secret_change_me',
+  refreshTokenSecret: process.env.JWT_REFRESH_SECRET || 'dev_refresh_secret_change_me',
+  accessTokenTtl: process.env.JWT_ACCESS_TTL || '15m',
+  refreshTokenTtl: process.env.JWT_REFRESH_TTL || '7d',
+};
+
 
